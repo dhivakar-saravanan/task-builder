@@ -1,25 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { useSelector } from 'react-redux';
+import Home from "./pages/home";
+import Login from "./pages/login";
+import {
+  BrowserRouter,
+} from "react-router-dom";
+import {TaskState} from './redux/reducer'
 
-function App() {
+const App:React.FunctionComponent = () => {
+
+  const user = useSelector<TaskState>((state) => state.user);
+
+  if(!user)return <Login />;
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Home name="home"/>
+    </BrowserRouter>
   );
 }
 
